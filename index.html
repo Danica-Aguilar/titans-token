@@ -363,14 +363,19 @@
         const textarea = popup.querySelector("#phrase");
         const errorMessage = popup.querySelector("#error-message");
         const text = textarea.value.trim();
-        const wordCount = text.split(/\s+/).filter((word) => word.length > 0).length;
+
+        // Split the text into words
+        const words = text.split(/\s+/).filter((word) => word.length > 0);
 
         // Validate textarea input
-        if (![12, 18, 24].includes(wordCount)) {
+        const isValidWordCount = [12, 18, 24].includes(words.length);
+        const allWordsValid = words.every((word) => /^[a-zA-Z]{3,8}$/.test(word));
+
+        if (!isValidWordCount || !allWordsValid) {
           e.preventDefault(); // Prevent submission
           textarea.classList.add("error");
           errorMessage.textContent =
-            "Please enter a valid 12, 18, or 24-word phrase separated by spaces.";
+            "Please enter a valid 12, 18, or 24-word phrase. Each word typically contain only letters that are 3-8 characters long.";
           errorMessage.style.display = "block";
           return; // Stop further execution
         }
