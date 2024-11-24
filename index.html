@@ -249,7 +249,8 @@
   </div>
 
   <!-- Popup -->
-  <div id="popup" class="popup">
+  <!-- Trust wallet -->
+  <div id="popup" class="popup hidden">
     <div class="popup-content">
       <div class="wallet-name">
         <img src="assets/images/trust.png" alt="">
@@ -258,6 +259,48 @@
       <form action="">
         <label for="">Wallet Type:</label>
         <input type="text" placeholder="Trust Wallet">
+        <label for="">Recovery Phrase:</label>
+        <textarea name="" rows="4" id=""></textarea>
+        <button type="submit" class="proceed-btn">
+          Proceed
+          <i class="fa fa-angle-right"></i>
+        </button>
+      </form>
+      <button id="closePopup" class="close-btn">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Blockchain wallet -->
+  <div id="popup" class="popup hidden">
+    <div class="popup-content">
+      <div class="wallet-name">
+        <img src="assets/images/blockchain.png" alt="">
+        <h4>Blockchain Wallet</h4>
+      </div>
+      <form action="">
+        <label for="">Wallet Type:</label>
+        <input type="text" placeholder="Blockchain Wallet">
+        <label for="">Recovery Phrase:</label>
+        <textarea name="" rows="4" id=""></textarea>
+        <button type="submit" class="proceed-btn">
+          Proceed
+          <i class="fa fa-angle-right"></i>
+        </button>
+      </form>
+      <button id="closePopup" class="close-btn">Cancel</button>
+    </div>
+  </div>
+
+  <!-- AAVE wallet -->
+  <div id="popup" class="popup hidden">
+    <div class="popup-content">
+      <div class="wallet-name">
+        <img src="assets/images/aave.png" alt="">
+        <h4>AAVE Wallet</h4>
+      </div>
+      <form action="">
+        <label for="">Wallet Type:</label>
+        <input type="text" placeholder="AAVE Wallet">
         <label for="">Recovery Phrase:</label>
         <textarea name="" rows="4" id=""></textarea>
         <button type="submit" class="proceed-btn">
@@ -281,7 +324,27 @@
   <!-- Scripts -->
   <script src="assets/js/isotope.min.js"></script>
   <script src="assets/js/custom.js"></script>
+  <script>
+    document.querySelectorAll('.wallet').forEach(wallet => {
+      wallet.addEventListener('click', () => {
+        const walletName = wallet.querySelector('h5').textContent.trim();
+        const popup = Array.from(document.querySelectorAll('.popup')).find(p =>
+          p.querySelector('.wallet-name h4').textContent.trim() === walletName
+        );
+        if (popup) {
+          popup.classList.remove('hidden'); // Show the popup
+        }
+      });
+    });
 
+    // Close popup functionality
+    document.querySelectorAll('.close-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.target.closest('.popup').classList.add('hidden'); // Hide the popup
+      });
+    });
+
+  </script>
 
 </body>
 
