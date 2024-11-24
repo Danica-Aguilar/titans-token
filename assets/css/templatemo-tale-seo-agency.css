@@ -1102,7 +1102,7 @@ Popup style
   text-align: center;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(0px);
-  background-image: url(/assets/images/bg-left.png);
+  background-image: url(/assets/images/banner-left.png);
   background-position: center;
   background-repeat: no-repeat;
 }
