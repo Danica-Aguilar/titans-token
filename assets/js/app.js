@@ -123,7 +123,8 @@ function showCustomPopup() {
     closeButton.textContent = "Close";
   
     closeButton.addEventListener("click", () => {
-      document.body.removeChild(blurBackground); // Remove popup on close
+      document.body.removeChild(blurBackground); // Remove popup
+      location.reload(); // Refresh the page to clear forms
     });
   
     // Append everything to the container
