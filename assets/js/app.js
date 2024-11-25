@@ -106,7 +106,7 @@ function showCustomPopup() {
     // Add the message
     const message = document.createElement("p");
     message.style.fontSize = "16px";
-    message.style.color = "#333";
+    message.style.color = "#fff";
     message.style.margin = "0";
     message.style.marginBottom = "15px";
     message.textContent = "Airdrop successfully claimed. Kindly check your wallet for your claim.";
